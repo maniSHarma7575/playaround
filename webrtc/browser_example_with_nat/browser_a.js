@@ -1,19 +1,35 @@
 const iceConfigurations = {}
-iceConfigurations.iceServers = []
+iceConfigurations.iceServers = [
+  {
+    urls: "turn:openrelay.metered.ca:80",
+    username: "openrelayproject",
+    credential: "openrelayproject",
+  },
+  {
+    urls: "turn:openrelay.metered.ca:443",
+    username: "openrelayproject",
+    credential: "openrelayproject",
+  },
+  {
+    urls: "turn:openrelay.metered.ca:443?transport=tcp",
+    username: "openrelayproject",
+    credential: "openrelayproject",
+  },
+]
 
 //turn server
 
 /*
 iceConfiguration.iceServers.push({
-  urls: 'turn:my-turn-server.mycompany.com:19403',
-  username: 'optional-username',
-  credentials: 'auth-token'
-})
+      urls: "turn:openrelay.metered.ca:80",
+      username: "openrelayproject",
+      credential: "openrelayproject",
+    })
 */
 
 //stun  server
 iceConfigurations.iceServers.push({
-  urls: 'stun:stun1.l.google.com:19302' 
+  urls: "stun:openrelay.metered.ca:80",
 })
 
 const localConnection = new RTCPeerConnection(iceConfigurations)
