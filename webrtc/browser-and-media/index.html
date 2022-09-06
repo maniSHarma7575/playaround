@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Playing around with browser and media source</title>
+  </head>
+  <body>
+    <video autoplay></video>
+    <script>
+      function hasGetUserMedia() {
+        return !!(navigator.getUserMedia || navigator.webkitGetUserMedia 
+        || navigator.mozGetUserMedia || navigator.msGetUserMedia);
+      }
+
+      if(hasGetUserMedia()){
+
+      } else{
+        alert('getUserMedia() is not supported in your browser')
+      }
+
+      var errorCallback = function(e){
+        console.log('Rejected!', e);
+      }
+
+      if(hasGetUserMedia()){
+        navigator.getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia 
+        || navigator.mozGetUserMedia || navigator.msGetUserMedia);
+
+        const hdConstraints = {
+          video: {
+            mandatory: {
+              minWidth: 1280,
+              minHeight: 720
+            }
+          },
+          audio: true
+        }
+        navigator.getUserMedia(hdConstraints, function(localMedia){
+          var video = document.querySelector('video')
+
+        console.log('Executed')
+          video.srcObject = localMedia
+
+          video.onloadedmetadata = function(e) {
+            console.log(
+              'Do some stuff'
+            )
+          }
+        }, errorCallback)
+      }
+    </script>
+  </body>
+</html>
